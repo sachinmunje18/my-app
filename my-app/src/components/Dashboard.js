@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom'; // Import useHistory
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 function Dashboard() {
@@ -9,7 +9,7 @@ function Dashboard() {
   const [date, setDate] = useState('');
   const [flights, setFlights] = useState([]);
   const [message, setMessage] = useState('');
-  const history = useHistory(); // Initialize useHistory
+  const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function Dashboard() {
   };
 
   const handleBook = (flightId) => {
-    history.push(`/book/${flightId}`);
+    navigate(`/book/${flightId}`);
   };
 
   return (

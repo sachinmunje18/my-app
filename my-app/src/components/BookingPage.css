@@ -1,41 +1,98 @@
-/* BookingPage.css */
-
-.booking-container {
-    padding: 20px;
+/* Navbar Styles */
+.navbar {
+    width: 100%;
+    padding: 15px;
+    background-color: #343a40; /* Dark gray color for the navbar */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .booking-container h2 {
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .view-booking-btn {
+    padding: 10px 20px;
+    background-color: #343a40; /* Match button color with navbar */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-booking-btn:hover {
+    background-color: #23272b; /* Slightly darker shade on hover */
+  }
+  
+  /* Booking Form Styles */
+  .booking-container {
+    max-width: 600px;
+    margin: 80px auto; /* Add more space between the navbar and form */
+    padding: 20px;
+    border: 1px solid #ddd; /* Add border to form */
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #444;
+    font-size: 28px;
+    font-weight: 600;
+  }
+  
+  .form-group {
     margin-bottom: 20px;
   }
   
-  .booking-container .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .booking-container .form-group label {
+  label {
     display: block;
+    font-weight: bold;
     margin-bottom: 5px;
+    color: #333;
   }
   
-  .booking-container .form-group input {
+  input, textarea {
     width: 100%;
-    padding: 8px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
   }
   
-  .booking-container button {
-    padding: 10px 15px;
-    background-color: #007bff;
+  textarea {
+    resize: vertical;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #343a40; /* Match submit button color with navbar */
     color: white;
+    font-size: 16px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  .booking-container button:hover {
-    background-color: #0056b3;
+  .submit-btn:hover {
+    background-color: #23272b; /* Slightly darker shade on hover */
   }
   
-  .booking-container p {
-    margin-top: 15px;
-    color: red;
+  .message {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    color: #28a745;
   }
   
