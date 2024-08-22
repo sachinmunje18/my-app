@@ -1,0 +1,41 @@
+/* BookingPage.css */
+
+.booking-container {
+    padding: 20px;
+  }
+  
+  .booking-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .booking-container .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .booking-container .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .booking-container .form-group input {
+    width: 100%;
+    padding: 8px;
+  }
+  
+  .booking-container button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .booking-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .booking-container p {
+    margin-top: 15px;
+    color: red;
+  }
+  

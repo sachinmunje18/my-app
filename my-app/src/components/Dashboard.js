@@ -1,5 +1,6 @@
-// src/components/Dashboard.js
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom'; // Import useHistory
 import './Dashboard.css';
 
 function Dashboard() {
@@ -7,19 +8,32 @@ function Dashboard() {
   const [destination, setDestination] = useState('');
   const [date, setDate] = useState('');
   const [flights, setFlights] = useState([]);
+  const [message, setMessage] = useState('');
+  const history = useHistory(); // Initialize useHistory
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    // Mock search result
-    const mockFlights = [
-      { id: 1, flightNumber: 'AB123', source, destination, date, price: 200 },
-      { id: 2, flightNumber: 'CD456', source, destination, date, price: 250 },
-    ];
-    setFlights(mockFlights);
+    try {
+      const response = await axios.get('http://localhost:8080/api/flights/search', {
+        params: { source, destination, date }
+      });
+
+      if (response.data.length > 0) {
+        setFlights(response.data);
+        setMessage('');
+      } else {
+        setFlights([]);
+        setMessage('No flights available on this date.');
+      }
+    } catch (error) {
+      console.error('Error fetching flights:', error);
+      setFlights([]);
+      setMessage('An error occurred while fetching flights.');
+    }
   };
 
   const handleBook = (flightId) => {
-    alert(`Flight ${flightId} booked successfully!`);
+    history.push(`/book/${flightId}`);
   };
 
   return (
@@ -29,7 +43,6 @@ function Dashboard() {
         <ul className="navbar-menu">
           <li className="navbar-item"><a href="#">Home</a></li>
           <li className="navbar-item"><a href="#">Book a flight</a></li>
-
           <li className="navbar-item"><a href="#">Profile</a></li>
           <li className="navbar-item"><a href="#">Logout</a></li>
         </ul>
@@ -71,22 +84,24 @@ function Dashboard() {
         </div>
 
         <div className="flights-list">
-          {flights.length > 0 ? (
+          {message && <p>{message}</p>}
+          {flights.length > 0 && !message ? (
             <div>
               <h2>Available Flights</h2>
               <ul>
                 {flights.map((flight) => (
                   <li key={flight.id} className="flight-item">
                     <p>Flight Number: {flight.flightNumber}</p>
-                    <p>Price: ${flight.price}</p>
+                    <p>Source: {flight.source}</p>
+                    <p>Destination: {flight.destination}</p>
+                    <p>Date: {flight.date}</p>
+                    <p>Cost: ₹{flight.cost}</p>
                     <button onClick={() => handleBook(flight.id)}>Book</button>
                   </li>
                 ))}
               </ul>
             </div>
-          ) : (
-            <p>No flights available. Please adjust your search criteria.</p>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
