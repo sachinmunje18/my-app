@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
-import './BookingPage.css'; // Import the CSS file for styling
+import { useParams } from 'react-router-dom';
+import './BookingPage.css';
 
 function BookingPage() {
   const { flightId } = useParams(); // Get the flightId from the URL
-  const navigate = useNavigate(); // Hook for navigation
-  const [flightNumber, setFlightNumber] = useState('');
-  const [email, setEmail] = useState('');
+  const [flightNumber, setFlightNumber] = useState(flightId); // Automatically set Flight Number
+  const [email, setEmail] = useState(''); // Email will be set based on the logged-in user
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState('');
+
+  // Simulating fetching the current user's email (replace with actual logic)
+  useEffect(() => {
+    const loggedInUserEmail = localStorage.getItem('userEmail'); // Example: Fetch from local storage
+    if (loggedInUserEmail) {
+      setEmail(loggedInUserEmail);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,17 +41,11 @@ function BookingPage() {
     }
   };
 
-  const handleViewBooking = () => {
-    navigate('/view-booking'); // Navigate to the booking details page
-  };
-
   return (
     <>
       <nav className="navbar">
         <div className="navbar-brand">Flight Booking</div>
-        <button className="view-booking-btn" onClick={handleViewBooking}>
-          View Your Booking
-        </button>
+        <button className="view-booking-btn">View Your Booking</button>
       </nav>
 
       <div className="booking-container">
@@ -55,8 +56,7 @@ function BookingPage() {
             <input
               type="text"
               value={flightNumber}
-              onChange={(e) => setFlightNumber(e.target.value)}
-              required
+              readOnly
             />
           </div>
           <div className="form-group">
@@ -64,8 +64,7 @@ function BookingPage() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              readOnly
             />
           </div>
           <div className="form-group">
