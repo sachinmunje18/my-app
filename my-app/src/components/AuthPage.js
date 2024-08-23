@@ -1,4 +1,3 @@
-
 // src/components/AuthPage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -63,7 +62,7 @@ function AuthPage() {
         alert('Login successful!');
         navigate('/dashboard'); // Redirect to dashboard
       } else {
-        alert('Login failed');
+        alert('Invalid Credentails');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -101,13 +100,7 @@ function AuthPage() {
                   />
                   <label htmlFor="password">Enter your password</label>
                 </div>
-                <div className="forget">
-                  <label htmlFor="remember">
-                    <input type="checkbox" id="remember" />
-                    <p>Remember me</p>
-                  </label>
-                  <button type="button" onClick={() => {/* Handle forgot password */}}>Forgot password?</button>
-                </div>
+                
                 <button type="submit">Log In</button>
                 <div className="register">
                   <p>Don't have an account? <button type="button" onClick={() => setIsLogin(false)}>Register</button></p>
@@ -167,4 +160,4 @@ function AuthPage() {
   );
 }
 
-export default AuthPage;
+export default AuthPage;

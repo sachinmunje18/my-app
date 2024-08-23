@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './BookingPage.css';
 
 function BookingPage() {
   const { flightId } = useParams(); // Get the flightId from the URL
-  const [flightNumber, setFlightNumber] = useState(flightId); // Automatically set Flight Number
-  const [email, setEmail] = useState(''); // Email will be set based on the logged-in user
+  const [flightNumber] = useState(flightId); // Automatically set Flight Number
+  const [email, setEmail] = useState(''); // Allow user to enter their email manually
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState('');
-
-  // Simulating fetching the current user's email (replace with actual logic)
-  useEffect(() => {
-    const loggedInUserEmail = localStorage.getItem('userEmail'); // Example: Fetch from local storage
-    if (loggedInUserEmail) {
-      setEmail(loggedInUserEmail);
-    }
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,7 +56,8 @@ function BookingPage() {
             <input
               type="email"
               value={email}
-              readOnly
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
