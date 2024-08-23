@@ -1,4 +1,3 @@
-// src/components/BookingListPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -24,12 +23,14 @@ function BookingListPage() {
   }, []);
 
   const handleUpdate = (id) => {
+    // Ensure this path matches the route configuration in App.js
     navigate(`/update-booking/${id}`);
   };
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:8080/api/bookings/cancel/${id}`);
+      // Update the state to remove the deleted booking
       setBookings(bookings.filter((booking) => booking.id !== id));
     } catch (err) {
       console.error('Error deleting booking:', err);
