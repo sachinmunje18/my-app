@@ -1,23 +1,23 @@
-/* src/components/Dashboard.css */
-
-/* Overall container with a gradient background and centered content */
+/* Dashboard Container Styling */
 .dashboard-container {
-  background: linear-gradient(to right, #e0f7fa, #b3e5fc); /* Sky blue gradient background */
+  background: url('/public/aeroplane.jpg') no-repeat center center fixed; /* Background image */
+  background-size: cover; /* Cover the container */
   min-height: 100vh;
-  font-family: 'Verdana', sans-serif;
+  font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem; /* Ample padding for spacious look */
+  padding: 3rem;
   margin-top: 60px; /* Offset for the fixed navbar */
+  color: #ffffff;
 }
 
-/* Navbar with a vibrant gradient background and shadow */
+/* Navbar Styling */
 .navbar {
-  background: linear-gradient(to right, #00bcd4, #0097a7); /* Sky blue gradient */
+  background: #e0f7fa; /* Light blue background */
   padding: 1rem 2rem;
-  border-bottom: 3px solid #0097a7; /* Darker sky blue for border */
+  border-bottom: 3px solid #4fc3f7; /* Darker blue accent border */
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -25,24 +25,22 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  box-sizing: border-box; /* Include padding in width calculation */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
 }
 
-/* Ensure the navbar expands to full width */
 .navbar-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1400px; /* Larger max-width for spacious layout */
-  margin: 0 auto; /* Center the content */
+  max-width: 1400px; /* Wider layout */
+  margin: 0 auto;
 }
 
-/* Style for the navbar brand and menu */
 .navbar-brand {
-  font-size: 2rem; /* Larger font size */
+  font-size: 2rem;
   font-weight: bold;
-  color: #ffffff;
+  color: #01579b; /* Dark blue text color */
   letter-spacing: 1px;
 }
 
@@ -58,34 +56,36 @@
 }
 
 .navbar-item a {
-  color: #ffffff; /* White color for links */
+  color: #01579b; /* Dark blue text color */
   text-decoration: none;
-  font-size: 1.2rem; /* Larger font size */
+  font-size: 1.2rem;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .navbar-item a:hover {
-  background-color: #0097a7; /* Darker sky blue for hover */
-  color: #ffffff; /* Keep text white on hover */
+  background-color: #b3e5fc; /* Slightly darker blue for hover */
+  color: #002f6c; /* Even darker blue for text on hover */
   transform: scale(1.05); /* Slight zoom effect */
 }
 
-/* Dashboard content with a card-like design */
+/* Dashboard Content Styling */
 .dashboard-content {
-  background-color: #ffffff;
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
-  padding: 2rem; /* Increased padding */
+  background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  padding: 2rem;
   width: 100%;
   max-width: 900px; /* Wider max-width */
   position: relative;
   margin-top: 60px; /* Offset for the fixed navbar */
-  box-sizing: border-box; /* Include padding in width calculation */
+  box-sizing: border-box;
+  color: #333333; /* Darker text color for readability */
+  border: 1px solid #bdc3c7; /* Subtle gray border */
 }
 
-/* Add a vibrant gradient border */
+/* Accent border */
 .dashboard-content::before {
   content: '';
   position: absolute;
@@ -93,89 +93,101 @@
   left: -12px;
   right: -12px;
   bottom: -12px;
-  background: linear-gradient(to right, #00bcd4, #0097a7);
+  background: linear-gradient(to right, #1abc9c, #16a085);
   border-radius: 12px;
   z-index: -1;
 }
 
-/* Style the search form */
+/* Search Form Styling */
+.search-form {
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 600px; /* Adjusted max-width */
+  width: 100%;
+  margin: 2rem auto;
+}
+
 .search-form h2 {
-  color: #333;
-  margin-bottom: 1.2rem; /* Larger margin */
-  font-size: 1.6rem; /* Larger font size */
+  color: #2c3e50;
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  border-bottom: 3px solid #00bcd4; /* Sky blue border */
+  border-bottom: 3px solid #1abc9c; /* Soft teal accent border */
   padding-bottom: 0.5rem;
 }
 
 .search-form .form-group {
-  margin-bottom: 1.2rem; /* Larger margin */
+  margin-bottom: 1.2rem;
 }
 
 .search-form label {
   display: block;
-  margin-bottom: 0.6rem; /* Larger margin */
+  margin-bottom: 0.6rem;
   font-weight: 600;
-  color: #555;
+  color: #34495e; /* Darker gray for labels */
 }
 
 .search-form input {
   width: 100%;
-  padding: 0.8rem; /* Increased padding */
-  border: 1px solid #ddd;
-  border-radius: 6px; /* Slightly larger border radius */
-  font-size: 1rem; /* Larger font size */
+  padding: 0.8rem;
+  border: 1px solid #bdc3c7; /* Light gray border */
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #ffffff; /* White background */
+  color: #333333;
   transition: border-color 0.3s ease;
 }
 
 .search-form input:focus {
-  border-color: #00bcd4; /* Sky blue border on focus */
+  border-color: #1abc9c; /* Soft teal on focus */
   outline: none;
 }
 
 .search-form button {
-  background-color: #00bcd4;
+  background-color: #1abc9c; /* Soft teal button color */
   color: white;
-  padding: 0.8rem 1.2rem; /* Increased padding */
+  padding: 0.8rem 1.2rem;
   border: none;
   border-radius: 6px;
-  font-size: 1.1rem; /* Larger font size */
+  font-size: 1.1rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .search-form button:hover {
-  background-color: #0097a7;
+  background-color: #16a085; /* Slightly darker teal on hover */
   transform: scale(1.05); /* Slight zoom effect */
 }
 
-/* Style the flights list */
+/* Flights List Styling */
 .flights-list {
-  background-color: #ffffff;
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
-  padding: 2rem; /* Increased padding */
+  background: rgba(255, 255, 255, 0.8); /* White background with slight transparency */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  padding: 2rem;
   width: 100%;
   max-width: 900px; /* Wider max-width */
   margin-top: 2rem; /* Space from other elements */
   max-height: 400px; /* Increased maximum height */
-  overflow-y: auto; /* Add scroll if content overflows */
+  overflow-y: auto; /* Scroll if content overflows */
+  color: #333333; /* Darker text color */
 }
 
 .flights-list h2 {
-  margin-bottom: 1.2rem; /* Larger margin */
-  color: #333;
-  font-size: 1.6rem; /* Larger font size */
+  margin-bottom: 1.2rem;
+  color: #2c3e50; /* Dark gray for section headers */
+  font-size: 1.6rem;
   font-weight: bold;
 }
 
 .flight-item {
-  background-color: #f9f9f9;
-  padding: 1rem; /* Increased padding */
-  border: 1px solid #ddd;
-  border-radius: 8px; /* Slightly larger border radius */
-  margin-bottom: 1rem; /* Increased margin */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* White background for flight items */
+  padding: 1rem;
+  border: 1px solid #bdc3c7; /* Light gray border */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -185,14 +197,14 @@
 }
 
 .flight-item p {
-  margin: 0.6rem 0; /* Increased margin */
-  color: #666;
+  margin: 0.6rem 0;
+  color: #333333; /* Darker text color */
 }
 
 .flight-item button {
-  background-color: #4caf50;
+  background-color: #1abc9c; /* Soft teal button color */
   color: white;
-  padding: 0.6rem 1.2rem; /* Increased padding */
+  padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -200,13 +212,13 @@
 }
 
 .flight-item button:hover {
-  background-color: #388e3c;
+  background-color: #16a085; /* Slightly darker teal on hover */
   transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* Handle empty state */
 .no-flights {
   text-align: center;
-  font-size: 1.3rem; /* Larger font size */
-  color: #555;
+  font-size: 1.3rem;
+  color: #7f8c8d; /* Light gray */
 }
