@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 import './BookingPage.css';
 
 function BookingPage() {
@@ -12,11 +12,13 @@ function BookingPage() {
   const [address, setAddress] = useState('');
   const [message, setMessage] = useState('');
 
+  const navigate = useNavigate(); // Use navigate for programmatic navigation
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // Send a request to the backend to book the flight
-      const response = await axios.post('http://localhost:8080/api/bookings', {
+      await axios.post('http://localhost:8080/api/bookings', {
         flightId,
         flightNumber,
         email,
@@ -33,11 +35,15 @@ function BookingPage() {
     }
   };
 
+  const handleViewBooking = () => {
+    navigate('/bookings'); // Navigate to the booking list page
+  };
+
   return (
     <>
       <nav className="navbar">
         <div className="navbar-brand">Flight Booking</div>
-        <button className="view-booking-btn">View Your Booking</button>
+        <button className="view-booking-btn" onClick={handleViewBooking}>View Your Booking</button>
       </nav>
 
       <div className="booking-container">

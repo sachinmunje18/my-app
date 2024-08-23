@@ -1,0 +1,108 @@
+/* src/components/BookingListPage.css */
+
+.booking-list-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .back-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-btn:hover {
+    background-color: #777;
+  }
+  
+  .booking-list-content {
+    margin-top: 20px;
+  }
+  
+  .booking-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .booking-table table {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+  }
+  
+  .booking-table th, .booking-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .booking-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .booking-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .booking-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .update-form {
+    margin-top: 20px;
+  }
+  
+  .update-form h3 {
+    margin-bottom: 10px;
+  }
+  
+  .update-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .update-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .update-form input, .update-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .update-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .update-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .message {
+    margin-top: 10px;
+    color: #d9534f;
+  }
+  
