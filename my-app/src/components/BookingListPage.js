@@ -1,145 +1,89 @@
 // src/components/BookingListPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './BookingListPage.css';
 
 function BookingListPage() {
   const [bookings, setBookings] = useState([]);
-  const [selectedBooking, setSelectedBooking] = useState(null);
-  const [name, setName] = useState('');
-  const [mobileno, setMobileno] = useState('');
-  const [address, setAddress] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch bookings on component mount
     const fetchBookings = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/bookings');
         setBookings(response.data);
-      } catch (error) {
-        console.error('Error fetching bookings:', error);
+      } catch (err) {
+        console.error('Error fetching bookings:', err);
+        setError('Failed to fetch bookings. Please try again.');
       }
     };
-    
+
     fetchBookings();
   }, []);
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:8080/api/updateBooking', {
-        bookingId: selectedBooking,
-        name,
-        mobileno,
-        address
-      });
-      setMessage('Booking updated successfully!');
-      // Refresh bookings
-      const response = await axios.get('http://localhost:8080/api/bookings');
-      setBookings(response.data);
-    } catch (error) {
-      console.error('Error updating booking:', error);
-      setMessage('Failed to update the booking.');
-    }
+  const handleUpdate = (id) => {
+    navigate(`/update-booking/${id}`);
   };
 
-  const handleCancel = async (bookingId) => {
+  const handleDelete = async (id) => {
     try {
-      await axios.post(`http://localhost:8080/api/cancel/${bookingId}`);
-      setMessage('Booking canceled successfully!');
-      // Refresh bookings
-      const response = await axios.get('http://localhost:8080/api/bookings');
-      setBookings(response.data);
-    } catch (error) {
-      console.error('Error canceling booking:', error);
-      setMessage('Failed to cancel the booking.');
+      await axios.delete(`http://localhost:8080/api/bookings/cancel/${id}`);
+      setBookings(bookings.filter((booking) => booking.id !== id));
+    } catch (err) {
+      console.error('Error deleting booking:', err);
+      setError('Failed to cancel booking. Please try again.');
     }
   };
 
   return (
     <div className="booking-list-container">
       <nav className="navbar">
-        <div className="navbar-brand">Flight Booking</div>
-        <button className="back-btn" onClick={() => window.history.back()}>Back</button>
+        <div className="navbar-brand">Booking List</div>
+        <button className="back-btn" onClick={() => navigate('/')}>Back to Dashboard</button>
       </nav>
 
+      {error && <p className="error-message">{error}</p>}
+
       <div className="booking-list-content">
-        <h2>Manage Your Bookings</h2>
-        <div className="booking-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Booking ID</th>
-                <th>Flight ID</th>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Mobile No</th>
-                <th>Address</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookings.map(booking => (
-                <tr key={booking.bookingId}>
-                  <td>{booking.bookingId}</td>
+        <table className="booking-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Flight ID</th>
+              <th>Flight Number</th>
+              <th>Email</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.length > 0 ? (
+              bookings.map((booking) => (
+                <tr key={booking.id}>
+                  <td>{booking.id}</td>
                   <td>{booking.flightId}</td>
-                  <td>{booking.emailId}</td>
+                  <td>{booking.flightNumber}</td>
+                  <td>{booking.email}</td>
                   <td>{booking.name}</td>
-                  <td>{booking.mobileno}</td>
+                  <td>{booking.phone}</td>
                   <td>{booking.address}</td>
                   <td>
-                    <button onClick={() => {
-                      setSelectedBooking(booking.bookingId);
-                      setName(booking.name);
-                      setMobileno(booking.mobileno);
-                      setAddress(booking.address);
-                    }}>
-                      Update
-                    </button>
-                    <button onClick={() => handleCancel(booking.bookingId)}>
-                      Cancel
-                    </button>
+                    <button onClick={() => handleUpdate(booking.id)} className="update-btn">Update</button>
+                    <button onClick={() => handleDelete(booking.id)} className="delete-btn">Delete</button>
                   </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {selectedBooking && (
-          <form onSubmit={handleUpdate} className="update-form">
-            <h3>Update Booking</h3>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Mobile No</label>
-              <input
-                type="text"
-                value={mobileno}
-                onChange={(e) => setMobileno(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Address</label>
-              <textarea
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit">Update Booking</button>
-            {message && <p className="message">{message}</p>}
-          </form>
-        )}
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8">No bookings found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
