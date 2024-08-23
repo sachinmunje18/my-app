@@ -1,6 +1,6 @@
 /* Dashboard Container Styling */
 .dashboard-container {
-  background: url('/public/aeroplane.jpg') no-repeat center center fixed; /* Background image */
+  background: url('/public/air.jpg') no-repeat center center fixed; /* Background image */
   background-size: cover; /* Cover the container */
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
