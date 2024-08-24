@@ -45,7 +45,7 @@ function UpdateTicket() {
           destination,
           date
         });
-        setSuccessMessage('updated successfully.');
+        setSuccessMessage('Updated successfully.');
         setError('');
         setFlightAvailable(true);
       } else {
@@ -76,7 +76,8 @@ function UpdateTicket() {
             type="text"
             id="source"
             value={source}
-            readOnly
+            onChange={(e) => setSource(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -85,7 +86,8 @@ function UpdateTicket() {
             type="text"
             id="destination"
             value={destination}
-            readOnly
+            onChange={(e) => setDestination(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
