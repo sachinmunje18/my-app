@@ -9,6 +9,8 @@ function UpdateTicket() {
   const [source, setSource] = useState('');
   const [destination, setDestination] = useState('');
   const [date, setDate] = useState('');
+  const [originalSource, setOriginalSource] = useState(''); // Store original source
+  const [originalDestination, setOriginalDestination] = useState(''); // Store original destination
   const [flightAvailable, setFlightAvailable] = useState(true);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -21,6 +23,8 @@ function UpdateTicket() {
         setSource(query.source);
         setDestination(query.destination);
         setDate(query.date);
+        setOriginalSource(query.source); // Store the original source
+        setOriginalDestination(query.destination); // Store the original destination
       } catch (error) {
         console.error('Error fetching search query:', error);
         setError('An error occurred while fetching the search query.');
@@ -32,20 +36,32 @@ function UpdateTicket() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+
+    // Validate source and destination
+    if (source !== originalSource) {
+      setSource(originalSource);
+      setError('Source name does not match the original value.');
+      return;
+    }
+
+    if (destination !== originalDestination) {
+      setDestination(originalDestination);
+      setError('Destination name does not match the original value.');
+      return;
+    }
+
     try {
-      // Check if the flight is available for the given date
       const flightResponse = await axios.get('http://localhost:8080/api/flights/search', {
         params: { date }
       });
 
       if (flightResponse.data.length > 0) {
-        // Update the search query
         await axios.put(`http://localhost:8080/api/search/${id}`, {
           source,
           destination,
           date
         });
-        setSuccessMessage('S updated successfully.');
+        setSuccessMessage('Search updated successfully.');
         setError('');
         setFlightAvailable(true);
       } else {
@@ -76,7 +92,8 @@ function UpdateTicket() {
             type="text"
             id="source"
             value={source}
-            readOnly
+            onChange={(e) => setSource(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
@@ -85,7 +102,8 @@ function UpdateTicket() {
             type="text"
             id="destination"
             value={destination}
-            readOnly
+            onChange={(e) => setDestination(e.target.value)}
+            required
           />
         </div>
         <div className="form-group">
