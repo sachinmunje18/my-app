@@ -45,7 +45,7 @@ function UpdateTicket() {
           destination,
           date
         });
-        setSuccessMessage('Search query updated successfully.');
+        setSuccessMessage('updated successfully.');
         setError('');
         setFlightAvailable(true);
       } else {

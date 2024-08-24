@@ -28,8 +28,10 @@ function AuthPage() {
         body: JSON.stringify({ name, email, password }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        alert('Registration successful!');
+        alert(data.message);
         // Clear form fields
         setName('');
         setEmail('');
@@ -37,8 +39,7 @@ function AuthPage() {
         setConfirmPassword('');
         setIsLogin(true); // Switch to login after successful registration
       } else {
-        const errorText = await response.text();
-        alert('Registration failed: ' + errorText);
+        alert(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -58,11 +59,13 @@ function AuthPage() {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        alert('Login successful!');
+        alert(data.message);
         navigate('/dashboard'); // Redirect to dashboard
       } else {
-        alert('Invalid Credentails');
+        alert(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -160,4 +163,4 @@ function AuthPage() {
   );
 }
 
-export default AuthPage;
+export default AuthPage;
