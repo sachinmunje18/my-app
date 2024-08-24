@@ -129,3 +129,18 @@ button:hover {
 .flight-item button:hover {
   background-color: #218838;
 }
+
+/* Dashboard.css */
+
+.dashboard-container {
+  /* Existing styles */
+}
+
+/* Optional: Add styles for the modal */
+.modal-content {
+  background-color: #f8f9fa;
+}
+
+.modal-title {
+  color: #333;
+}

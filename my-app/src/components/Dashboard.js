@@ -1,7 +1,7 @@
-// src/components/Dashboard.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 import './Dashboard.css';
 
 function Dashboard() {
@@ -10,19 +10,19 @@ function Dashboard() {
   const [date, setDate] = useState('');
   const [flights, setFlights] = useState([]);
   const [message, setMessage] = useState('');
+  const [selectedFlight, setSelectedFlight] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      // Save the search query to the database
       await axios.post('http://localhost:8080/api/search/save', {
         source,
         destination,
         date
       });
 
-      // Fetch flights based on the search
       const response = await axios.get('http://localhost:8080/api/flights/search', {
         params: { source, destination, date }
       });
@@ -41,8 +41,23 @@ function Dashboard() {
     }
   };
 
-  const handleBook = (flightId) => {
-    navigate('/welcome-booking'); // Navigate to the new welcome page
+  const handleBook = (flight) => {
+    setSelectedFlight(flight);
+    setShowModal(true);
+  };
+
+  const handleClose = () => setShowModal(false);
+
+  const handleViewBookings = () => {
+    navigate('/view-booking');
+  };
+
+  const handleLogout = () => {
+    // Clear authentication data (e.g., token) from local storage or state
+    localStorage.removeItem('authToken'); // Adjust this as needed for your app
+
+    // Redirect to the root path or homepage
+    navigate('/'); // Redirect to the homepage or initial page
   };
 
   return (
@@ -50,9 +65,9 @@ function Dashboard() {
       <nav className="navbar">
         <div className="navbar-brand">Flight Booking</div>
         <ul className="navbar-menu">
-          <li className="navbar-item"><a href="#">Home</a></li>
-          <li className="navbar-item"><a href="#">Book a flight</a></li>
-          <li className="navbar-item"><a href="#">Profile</a></li>
+          <li className="navbar-item"><a href="#" className="navbar-button">Home</a></li>
+          <li className="navbar-item"><a href="#" className="navbar-button" onClick={handleViewBookings}>View Bookings</a></li>
+          <li className="navbar-item"><a href="#" className="navbar-button" onClick={handleLogout}>Logout</a></li>
         </ul>
       </nav>
 
@@ -104,7 +119,7 @@ function Dashboard() {
                     <p>Destination: {flight.destination}</p>
                     <p>Date: {flight.date}</p>
                     <p>Cost: ₹{flight.cost}</p>
-                    <button onClick={() => handleBook(flight.id)}>Book</button>
+                    <button onClick={() => handleBook(flight)}>Book</button>
                   </li>
                 ))}
               </ul>
@@ -112,6 +127,21 @@ function Dashboard() {
           ) : null}
         </div>
       </div>
+
+      {/* Bootstrap Modal */}
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Booking Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Thank You for Booking!</h4>
+          <p>Your booking for Flight Number: {selectedFlight?.flightNumber} was successful.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>Close</Button>
+          <Button variant="primary" onClick={handleViewBookings}>View Your Bookings</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
