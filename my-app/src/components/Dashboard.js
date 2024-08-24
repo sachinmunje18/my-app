@@ -45,7 +45,6 @@ function Dashboard() {
           <li className="navbar-item"><a href="#">Home</a></li>
           <li className="navbar-item"><a href="#">Book a flight</a></li>
           <li className="navbar-item"><a href="#">Profile</a></li>
-          <li className="navbar-item"><a href="#">Logout</a></li>
         </ul>
       </nav>
 
