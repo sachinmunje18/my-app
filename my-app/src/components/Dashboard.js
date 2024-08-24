@@ -1,4 +1,4 @@
-
+// src/components/Dashboard.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,14 @@ function Dashboard() {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
+      // Save the search query to the database
+      await axios.post('http://localhost:8080/api/search/save', {
+        source,
+        destination,
+        date
+      });
+
+      // Fetch flights based on the search
       const response = await axios.get('http://localhost:8080/api/flights/search', {
         params: { source, destination, date }
       });
@@ -27,14 +35,14 @@ function Dashboard() {
         setMessage('No flights available on this date.');
       }
     } catch (error) {
-      console.error('Error fetching flights:', error);
+      console.error('Error fetching flights or saving search:', error);
       setFlights([]);
       setMessage('An error occurred while fetching flights.');
     }
   };
 
   const handleBook = (flightId) => {
-    navigate(`/book/${flightId}`);
+    navigate('/welcome-booking'); // Navigate to the new welcome page
   };
 
   return (

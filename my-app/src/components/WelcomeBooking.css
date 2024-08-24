@@ -1,0 +1,14 @@
+/* src/components/WelcomeBooking.css */
+.welcome-booking-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .welcome-booking-container h1 {
+    color: #4CAF50;
+  }
+  
+  .welcome-booking-container button {
+    margin-top: 20px;
+  }
+  

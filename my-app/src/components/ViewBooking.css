@@ -1,0 +1,43 @@
+.view-booking-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .search-query-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .search-query-table th, .search-query-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .search-query-table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .update-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .error-message {
+    color: #f44336;
+  }
+  
