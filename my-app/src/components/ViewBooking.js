@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Table, Button, Alert, Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 import './ViewBooking.css';
+import AppNavbar from './Navbar'; // Adjust the path if needed
 
 function ViewBooking() {
   const [searchQueries, setSearchQueries] = useState([]);
@@ -37,51 +40,71 @@ function ViewBooking() {
   };
 
   return (
-    <div className="view-booking-container">
-      <h2>Manage Bookings</h2>
-      {error && <p className="error-message">{error}</p>}
-      <table className="search-query-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Source</th>
-            <th>Destination</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {searchQueries.length > 0 ? (
-            searchQueries.map(query => (
-              <tr key={query.id}>
-                <td>{query.id}</td>
-                <td>{query.source}</td>
-                <td>{query.destination}</td>
-                <td>{query.date}</td>
-                <td>
-                  <button 
-                    className="update-button" 
-                    onClick={() => handleUpdate(query.id)}
-                  >
-                    Update
-                  </button>
-                  <button 
-                    className="cancel-button" 
-                    onClick={() => handleCancel(query.id)}
-                  >
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5">No data available</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <AppNavbar />
+      <main role="main">
+        <Card className="bg-light mt-4">
+          <Card.Body>
+            <Card.Title>Manage Your Bookings</Card.Title>
+            <Card.Text>
+              Here you can view, update, and cancel your bookings.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Container className="view-booking-container mt-4">
+          <Row>
+            <Col>
+              {error && <Alert variant="danger">{error}</Alert>}
+              <Table striped bordered hover responsive>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Source</th>
+                    <th>Destination</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {searchQueries.length > 0 ? (
+                    searchQueries.map(query => (
+                      <tr key={query.id}>
+                        <td>{query.id}</td>
+                        <td>{query.source}</td>
+                        <td>{query.destination}</td>
+                        <td>{query.date}</td>
+                        <td>
+                          <Button 
+                            variant="warning" 
+                            className="me-2" 
+                            onClick={() => handleUpdate(query.id)}
+                          >
+                            Update
+                          </Button>
+                          <Button 
+                            variant="danger" 
+                            onClick={() => handleCancel(query.id)}
+                          >
+                            Cancel
+                          </Button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="text-center">No data available</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </Container>
+      </main>
+      <footer className="container mt-4">
+        <p>&copy; Company 2024</p>
+      </footer>
+    </>
   );
 }
 
